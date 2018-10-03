@@ -1,3 +1,6 @@
+/*
+Package nex implements numerous protocols and related things used in the official Nintendo NEX servers
+*/
 package nex
 
 import (
@@ -44,6 +47,7 @@ var OptionsFragment = 2
 
 // Options3 is unknown
 var Options3 = 3 // Unknown
+
 // Options4 is unknown
 var Options4 = 4 // Unknown
 

@@ -9,16 +9,6 @@ import (
 	"fmt"
 )
 
-// PacketV0Header represents a v0 PRUDP packet header
-type PacketV0Header struct {
-	Source      uint8
-	Destination uint8
-	TypeFlags   uint16
-	SessionID   uint8
-	Signature   [4]byte
-	SequenceID  uint16
-}
-
 func decodePacketV0(PRUDPPacket *Packet) map[string]interface{} {
 	checksumVersion := PRUDPPacket.Sender.Server.Settings.PrudpV0ChecksumVersion
 	checksumSize := 1
@@ -138,6 +128,14 @@ func encodePacketV0(PRUDPPacket *Packet) []byte {
 }
 
 // CalculateV0Checksum calculates the checksum of a prudpv0 packet
+//
+// Parameters:
+//   checksum: the base checksum for the packet
+//   packet: the packet to calculate the checksum of
+//   version: the version to calculate the checksum off of (unused)
+//
+// Returns:
+//   the calculated checksum of the provided packet
 func CalculateV0Checksum(checksum int, packet []byte, version int) int {
 	// in the future we need to check the `version` here and change the alg accordingly
 	pos := 0
@@ -186,6 +184,12 @@ func encodeOptionsV0(PRUDPPacket *Packet) []byte {
 }
 
 // CalculateV0Signature calculates the signature of a prudpv0 packet
+//
+// Parameters:
+//   PRUDPPacket: the packet to calculate the signature of
+//
+// Returns:
+//   the calculated signature of the provided packet
 func CalculateV0Signature(PRUDPPacket *Packet) []byte {
 	if PRUDPPacket.Type == Types["Data"] || (PRUDPPacket.Type == Types["Disconnect"] && PRUDPPacket.Sender.Server.Settings.PrudpV0SignatureVersion == 0) {
 		data := PRUDPPacket.Payload
