@@ -5,7 +5,11 @@ import (
 	"fmt"
 )
 
+// TODO: write a brief description of each field
 // Packet represents a generic PRUDP packet of any type
+//
+// Fields:
+//   <wip>
 type Packet struct {
 	Sender          *Client
 	Data            []byte
@@ -36,6 +40,9 @@ var (
 )
 
 // FromBytes converts a byte array to a generic PRUDP packet
+//
+// Parameters:
+//   Data: the byte array of the packet you want to decode into the struct
 func (PRUDPPacket *Packet) FromBytes(Data []byte) {
 	PRUDPPacket.Data = Data
 	//header := PRUDPPacket.decodeHeader()
@@ -80,6 +87,9 @@ func (PRUDPPacket *Packet) FromBytes(Data []byte) {
 }
 
 // Bytes converts a PRUDP packet to a byte array
+//
+// Returns:
+//   the packet struct as a byte array
 func (PRUDPPacket *Packet) Bytes() []byte {
 
 	var encoded []byte
@@ -99,26 +109,41 @@ func (PRUDPPacket *Packet) Bytes() []byte {
 }
 
 // SetVersion sets the packets Version property
+//
+// Parameters:
+//   Version: the packet version
 func (PRUDPPacket *Packet) SetVersion(Version int) {
 	PRUDPPacket.Version = Version
 }
 
 // SetSource sets the packets Source property
+//
+// Parameters:
+//   Source: the source of the packet
 func (PRUDPPacket *Packet) SetSource(Source uint8) {
 	PRUDPPacket.Source = Source
 }
 
 // SetDestination sets the packets Destination property
+//
+// Parameters:
+//   Destination: the destination byte of the packet
 func (PRUDPPacket *Packet) SetDestination(Destination uint8) {
 	PRUDPPacket.Destination = Destination
 }
 
 // SetSessionID sets the packets SessionID property
+//
+// Parameters:
+//   SessionID: the byte to set as the packets SessionID
 func (PRUDPPacket *Packet) SetSessionID(SessionID uint8) {
 	PRUDPPacket.SessionID = SessionID
 }
 
 // SetSignature sets the packets Signature property
+//
+// Parameters:
+//   Signature: the byte array to set as the packets signature
 func (PRUDPPacket *Packet) SetSignature(Signature []byte) {
 	PRUDPPacket.Signature = Signature
 }

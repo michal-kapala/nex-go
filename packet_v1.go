@@ -197,6 +197,16 @@ func encodeOptionsV1(PRUDPPacket *Packet) []byte {
 }
 
 // CalculateV1Signature calculates the HMAC signature for a given packet
+//
+// Parameters:
+//   Client: the a nex-go client object to get the signature base and secure key from
+//   header: the packet header
+//   options: the set packet options
+//   signature: the client or server connection signature
+//   payload: the packet payload
+//
+// Returns:
+//   the calculated packet signature
 func CalculateV1Signature(Client *Client, header []byte, options []byte, signature []byte, payload []byte) []byte {
 
 	signatureBase := bytes.NewBuffer(make([]byte, 0, 4))
